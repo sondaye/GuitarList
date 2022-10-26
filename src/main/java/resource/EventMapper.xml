@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team3.dao.EventDao">
+	<select id="getEventList" resultType="event" parameterType="event">
+		SELECT *
+		FROM event
+	</select>
+	<select id="getEventDetail" resultType="event" parameterType="string">
+		select *
+		from event
+		where evname = #{evname}
+	</select>
+	<select id="getReviewList" resultType="review" parameterType="review">
+		SELECT *
+		FROM review
+	</select>
+	<insert id="insertReview" parameterType="review">
+		insert into review values(review_seq.nextval,#{rctid},#{star},#{rcont})	
+	</insert>
+	<select id="getReviewList2" parameterType="int" resultType="review">
+		select * from review where rid = #{rid}
+	</select>
+	<update id="updateReview" parameterType="review">
+		UPDATE review
+		   SET star = #{star},
+			   rname = #{rname},
+			   rcont = #{rcont}
+		WHERE rid = #{rid}	
+	</update>
+	<delete id="deleteReview" parameterType="int">
+		delete
+		from review
+		where rid = #{rid}	
+	</delete>	
+	<select id="getReviewList3" parameterType="string" resultType="rr">
+		SELECT re.product, r.STAR, r.rcont
+		FROM receipt re, review r
+		WHERE re.rctid = r.rctid 
+		and product = #{product}
+	</select>
+	<insert id="applyDraw" parameterType="draw">
+		insert into draw values(draw_seq.nextval, #{event_id}, #{user_id})
+	</insert>
+	<insert id="insertFile" parameterType="reviewfile">
+	insert into reviewfile values(review_seq.currval, #{path}, #{fname})
+	</insert>
+	<select id="getCheck" parameterType="string" resultType="receipt">
+		select rctid from receipt where rctid = #{rctid}
+	</select>
+</mapper>

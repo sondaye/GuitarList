@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="team3.dao.SchDao">
+  
+  	<select id="schList" resultType="schguitar" parameterType="schguitar">
+ SELECT*
+      FROM guitar
+      WHERE 1=1
+      <if test="gname!=null">
+      AND gname LIKE '%'||#{gname}||'%'
+      </if>
+      <if test="standard !=null">
+      AND standard = #{standard}
+      </if>
+      <if test="neck !=null">
+      AND neck = #{neck}
+      </if>
+       <if test="brand !=null">
+      AND brand = #{brand}
+      </if>
+      ORDER BY guitarid
+	</select>
+	
+	<select id="compare" resultType="schguitar" parameterType="schguitar">
+		SELECT g.* , p.price
+		FROM guitar g, price p
+		WHERE (g.GUITARID,p.PRICE) in (
+		SELECT g.GUITARID ,max(p.PRICE)
+		FROM guitar g, price p
+		WHERE g.GUITARID = p.GUITARID
+		GROUP BY p.GUITARID
+		<if test="guitarid !=null">
+		HAVING g.guitarid = #{guitarid}
+		</if>
+		<if test="guitarid !=null">
+		OR g.guitarid = #{guitarid1}
+		</if>
+		<if test="guitarid !=null">
+		OR g.guitarid = #{guitarid2}
+		</if>
+		)
+	</select>
+
+  </mapper>

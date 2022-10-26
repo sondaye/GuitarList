@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="team3.dao.PostRepository">
+	<insert id="insPost" parameterType="post">
+		INSERT INTO post
+		(id, userId, boardId, title, content, createdAt, updatedAt)
+		VALUES 
+		(post_seq.nextval, #{userId}, #{boardId}, #{title}, #{content}, sysdate, sysdate)
+	</insert>
+	<insert id="insComment" parameterType="usercomment">
+		INSERT INTO USERCOMMENT(id, userId, postId, regno, com_content, createdAt, updatedAt) 
+		VALUES (userComment_seq.nextval, #{userId}, #{postId}, #{regno}, #{com_content} , sysdate, sysdate)
+	</insert> 
+	<!--
+		INSERT INTO usercomment (id, userId, postId, regno, com_content,createdAt, updatedAt) 
+		VALUES (usercomment_seq.nextval, 1, 2, 0, '고마워용~', sysdate, sysdate)
+	-->
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+ <mapper namespace="team3.dao.MemberDao">
+ 
+ 		<insert id="memberJoin" parameterType="member">
+			INSERT INTO MEMBER 
+			VALUES (member_seq.nextval,#{email},#{id},#{pass},#{name},
+								   #{nick},#{standard},0)
+		</insert>	
+		
+		<select id="login" parameterType="member" resultType="member">
+			SELECT *
+			FROM MEMBER
+			WHERE id = #{id}
+			AND pass = #{pass}
+		</select>
+		
+		<select id="getMemberDetail" parameterType="String">
+			SELECT name, nick, standard, point
+			FROM MEMBER
+			WHERE userid = #{userid}
+		</select>
+		
+		<!--다른곳에서 이걸 호출하면 안에있는 쿼리문이 실행된다  --> 
+ </mapper>

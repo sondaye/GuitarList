@@ -1,0 +1,53 @@
+html,body{
+	margin:0; 
+    padding:0;
+    height:100%
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#container{
+    flex:1;
+    padding-bottom: 30px;
+}
+footer{
+    padding: 15px 20px;
+	background: #333;
+	color:#fff;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+/*HEADER*/
+/*login 영역*/
+.wrapper #header #login{
+    border-bottom: 1px solid #e6e8eb;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    padding-right: 5em;
+}
+
+/*logo 영역*/
+.logo{
+    margin-top: 3em;
+    text-align: center;
+}
+
+/*Main menu*/
+#main_menu{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e6e8eb;
+    margin-top: 50px;
+    padding: 0;
+}
+#main_menu li{
+    padding: 16px 50px;
+}

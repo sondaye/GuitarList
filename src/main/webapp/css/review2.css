@@ -1,0 +1,203 @@
+@charset "UTF-8";
+html,body{
+	margin:0; 
+    padding:0;
+    height:100%
+}
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.container{
+	display:flex;
+    flex:1;
+    width:60%;
+    padding-bottom: 100px;
+    margin: 0 auto;
+}
+footer{
+    padding: 15px 20px;
+	background: #333;
+	color:#fff;
+}
+.footer_info{
+    padding-left: 30%;
+    margin: 0 auto;
+    text-align: start;
+}
+
+
+/*HEADER*/
+/*login 영역*/
+.wrapper #header #login{
+    border-bottom: 1px solid #e6e8eb;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    padding-right: 5em;
+}
+
+/*logo 영역*/
+.logo{
+    margin-top: 3em;
+    text-align: center;
+}
+/*main_menu 영역*/
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+nav{
+    height:15vh;
+    padding-bottom:3vh;
+    width: 50vw;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+nav a{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #bfbfbf;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding: 0 10px;
+}
+
+nav a:after{
+    content: "";
+    position: absolute;
+    background-color: #333;
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+nav a:hover{
+    color: #333;
+}
+nav a:hover:after{
+    width: 100%;
+}
+
+
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+form{
+    box-shadow: 0 0 5px;
+    border-radius: 15px;
+    width: 300px;
+    padding: 10px;
+    text-align: start;
+}
+.form-control{
+    text-align: start;
+    padding: 10px;
+}
+
+.input-group{
+    text-align: center;
+}
+
+.input-group span{
+    display: flex;
+    padding-left: 3rem;
+    font-weight: bold;
+}
+input{
+    padding-bottom: 10px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR',sans-serif;
+}
+
+textarea{
+    display: block;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 2px;
+    height:100px;
+    width: 200px;
+    font-family:inherit;
+    margin-left: 39px;
+}
+
+.input-group-prepend{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.text-right{
+    padding-top: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+.btn-success{
+    padding: 5px 40px;
+    border: 1px solid #bfbfbf;
+    border-radius: 10px;
+    font-family:inherit;
+}
+.btn-success:hover{
+    background-color: black;
+    color: white;
+}
+
+.btn-info{
+    padding: 5px 40px;
+    border: 1px solid #bfbfbf;
+    border-radius: 10px;
+    font-family:inherit;
+}
+
+.btn-info:hover{
+    background-color: red;
+    color: white;
+}
+
+
+#receiptCheckMsg{
+	margin:0;
+	padding-left:10px;
+}
+
+
+.review_file{
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
+.imginput{
+    display: inline;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 7px 7px 7px 7px;
+    width: 80px;
+
+}
+
+#receiptCheck{
+    display: inline;
+    width: 200px;
+}
+
+#starconts{
+    display: inline;
+    width: 200px;
+}

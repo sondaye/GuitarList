@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="team3.dao.PostRepository">
+	<select id="getHot10Post" resultType="bpm" parameterType="bpm">
+		SELECT *
+		FROM (
+			SELECT p.id id, title, content, createdAt, updatedAt, recommendation, views, reply_cnt,
+			p.userId , m.email, m.id memberId, m.pass, m.name, m.nick, m.standard, m.point,
+			p.boardId, b.boardName
+			FROM post p, member m, board b
+			WHERE 1=1
+			AND m.userid = p.userid
+			<if test="boardId!=null">
+			AND b.id = p.boardId
+			</if>
+			<if test="title!=null">
+			AND p.title LIKE '%' || #{title} || '%'
+			</if>
+			ORDER BY recommendation DESC,
+			createdAt DESC
+			)
+		WHERE ROWNUM BETWEEN 1 AND 10
+	</select>
+	<select id="getLatestPost" resultType="bpm" parameterType="bpm">
+		SELECT *
+		FROM (
+			SELECT p.id id, title, content, createdAt, updatedAt, recommendation, views, reply_cnt,
+			p.userid , m.email, m.id memberId, m.pass, m.name, m.nick, m.standard, m.point,
+			p.boardId, b.boardName
+			FROM post p, member m, board b
+			WHERE 1=1
+			AND m.userid = p.userid
+			<if test="boardId!=null">
+			AND b.id = p.boardId
+			</if>
+			<if test="title!=null">
+			AND p.title LIKE '%' || #{title} || '%'
+			</if>
+			ORDER BY createdAt DESC
+			)
+		WHERE ROWNUM BETWEEN 1 AND 10
+	</select>
+	<select id="getBoard" resultType="board">
+		SELECT *
+		FROM Board
+	</select>
+	<select id="getBoardPost" resultType="bpm" parameterType="bpm">
+		SELECT *
+		FROM (
+			SELECT p.id id, title, content, createdAt, updatedAt, recommendation, views, reply_cnt,
+			p.userid , m.email, m.id memberId, m.pass, m.name, m.nick, m.standard, m.point,
+			p.boardId, b.boardName
+			FROM post p, member m, board b
+			WHERE 1=1
+			AND m.userId = p.userId
+			AND b.id = p.boardId
+			<if test="boardId!=null">
+			AND b.id = #{boardId}
+			</if>
+			ORDER BY createdAt DESC
+			)
+		WHERE ROWNUM BETWEEN 1 AND 20
+	</select>
+	
+	<select id="getPost" resultType="bpm" parameterType="int">
+		SELECT p.id id, title, content, createdAt, updatedAt, recommendation, views, reply_cnt,
+			p.userid , m.email, m.id memberId, m.pass, m.name, m.nick, m.standard, m.point,
+			p.boardId, b.boardName
+			FROM post p, member m, board b
+		WHERE m.userId = p.userId
+		AND b.id = p.boardId
+		AND p.id = #{id}
+	</select>
+	
+	<update id="uptPost" parameterType="post">
+		UPDATE post
+		   SET title = #{title},
+			   content = #{content},
+			   updatedAt = sysdate
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delPost" parameterType="int">
+		delete
+		from post
+		where id = #{id}
+	</delete>
+	
+	
+	<!-- 
+	select * from dept
+		where danme like '%' || #{dname} || '%' vo에 선언한 get property getDname()
+		and loc like '%' || #{loc} || '%' vo에 선언한 get property getLoc()
+	
+	<select id="getComment" resultType="usercomment">
+		SELECT c.id id, c.USERNO ,u.NICKNAME ,u.USERLEVEL ,c.POSTID ,c.CONTENT ,
+		c.CREATEDAT ,c.UPDATEDAT, c.RECOMMENDATION, c.HATES 
+		FROM userComment c, USERINFO u, POST p 
+		WHERE p.ID  = c.POSTID
+		AND u.USERNO = c.USERNO 
+		AND p.ID = #{id}
+		ORDER BY createdAt DESC
+	</select>
+	-->
+	
+	<update id="uptViews" parameterType="int">
+		UPDATE post 
+			SET views = views+1
+			WHERE id = #{id}
+	</update>
+	
+	<insert id="likeUp" parameterType="likevo">
+		insert into LikeVo (postLikeId , postId, userId, likeCheck)
+		values((select * from (select NVL(max(postLikeId), 0)+1 from LikeVo)), #{postId}, #{userId}, 1)
+	</insert>
+	
+	<delete id="likeDown" parameterType="likevo">
+		delete from LikeVo
+		where postId = #{postId} and userId = #{userId} 
+	</delete>
+	
+	<update id="uptRec" parameterType="int"> 
+		update post
+			set recommendation = (
+				select NVL(count(postLikeId), 0) from LikeVo
+				where postId = #{id}
+			)
+			where id = #{id}
+	</update>
+	
+	<select id="findLike" resultType="int" parameterType="likevo">
+		select count(*)
+		from LikeVo
+		where 1=1
+		<if test="postId!=null">
+		AND postId = #{postId} 
+		</if>
+		<if test="userId!=null">
+		AND userId = #{userId}
+		</if>
+	</select>
+	
+	<select id="getComment" resultType="usercomment" parameterType="int">
+		SELECT c.id, c.REGNO, c.COM_CONTENT, c.CREATEDAT, c.UPDATEDAT, c.recommendation, c.HATES, 
+			c.USERID, m.id memberId ,m.NICK, m.STANDARD, m.POINT,
+			c.POSTID
+		FROM USERCOMMENT c, member m, post p
+		WHERE 1=1
+		AND m.userId = c.USERID
+		AND p.id = c.POSTID
+		AND postId = #{id}
+		ORDER BY createdAt DESC
+	</select>
+	
+	<update id="countCom" parameterType="int">
+		update post
+			set reply_cnt = (
+				select NVL(count(id), 0) from userComment
+				where postId = #{id}
+			)
+			where id = #{id}
+	</update>
+	
+	<delete id="delAllComment" parameterType="int">
+		delete from usercomment 
+		where postId = #{id}
+	</delete>
+	
+</mapper>
+

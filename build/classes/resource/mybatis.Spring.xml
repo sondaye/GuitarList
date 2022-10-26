@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<typeAliases>
+	<typeAlias alias="dao" type="team3.dao.TeamDao"/>
+	<typeAlias alias="guitar" type="team3.vo.Guitar"/>
+	<typeAlias alias="review1" type="team3.vo.Review1"/>
+	<!-- 커뮤니티 -->
+	<typeAlias alias="board" type="team3.vo.Board" />
+	<typeAlias alias="post" type="team3.vo.Post" />
+	<typeAlias alias="bpm" type="team3.vo.BoardPostMember" />
+	<typeAlias alias="writepost" type="team3.vo.WritePost" />
+	<typeAlias alias="likevo" type="team3.vo.LikeVo" />
+	<typeAlias alias="usercomment" type="team3.vo.UserComment" />
+	<!--이벤트-->
+	<typeAlias alias="event" type="team3.vo.event"/>
+	<typeAlias alias="review" type="team3.vo.review"/>
+	<typeAlias alias="receipt" type="team3.vo.receipt"/>
+	<typeAlias alias="rr" type="team3.vo.RR"/>
+	<typeAlias alias="draw" type="team3.vo.draw"/>
+	<typeAlias alias="reviewfile" type="team3.vo.reviewFile"/>
+	
+	<typeAlias alias="schguitar" type="team3.vo.SchGuitar"/>
+	
+	<!-- 멤버 -->
+	<typeAlias alias="member" type="team3.vo.Member"/>
+</typeAliases>
+	<mappers>
+		<mapper resource="resource/TeamMapper.xml"/>
+		<mapper resource="resource/recMapper.xml"/>
+		<!-- 커뮤니티 -->
+		<mapper resource="resource/PostMapper.xml"/>
+		<mapper resource="resource/WriteMapper.xml"/>
+		<!-- -->
+		<mapper resource="resource/SchMapper.xml"/>
+		<!-- 이벤트 -->
+		<mapper resource="resource/EventMapper.xml"/>
+		<!-- 멤버  -->
+		<mapper resource="resource/MemberMapper.xml"/>
+	</mappers>	
+	
+</configuration>

@@ -1,0 +1,150 @@
+html,body{
+	margin:0; 
+    padding:0;
+    height:100%
+}
+body{
+font-family: 'Noto Sans KR', sans-serif;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#container{
+    flex:1;
+    width:60%;
+    padding-bottom: 100px;
+    margin: 0 auto;
+}
+footer{
+    padding: 15px 20px;
+	background: #333;
+	color:#fff;
+}
+.footer_info{
+    padding-left: 30%;
+    margin: 0 auto;
+    text-align: start;
+}
+
+
+/*HEADER*/
+/*login 영역*/
+.wrapper #header #login{
+    border-bottom: 1px solid #e6e8eb;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    padding-right: 5em;
+}
+
+/*logo 영역*/
+.logo{
+    margin-top: 3em;
+    text-align: center;
+}
+
+/*main_menu 영역*/
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+nav{
+    height:15vh;
+    padding-bottom:3vh;
+    width: 50vw;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+nav a{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #bfbfbf;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding: 0 10px;
+}
+
+nav a:after{
+    content: "";
+    position: absolute;
+    background-color: #333;
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+nav a:hover{
+    color: #333;
+}
+nav a:hover:after{
+    width: 100%;
+}
+
+
+/*Main content 부분*/
+#container .item{
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    margin-left: 5%;
+    margin-top: 8%;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+}
+#container .item:nth-child(3n-2){ /*1,4,7번은 left 0*/
+    margin-left: 0;
+}
+#container .item:nth-child(-n+3){ /*1,2,3번은 top 0*/
+    margin-top: 0;
+}
+#container ul{
+    font-size: 0;
+    padding: 0;
+}
+#container ul, li{
+    list-style: none;
+}
+
+#container .item img{
+    width: 100%;
+}
+
+#container .item strong{
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 10px;
+}
+
+#container .item p{
+    font-size: 13px;
+    margin: 0 10px 20px 10px;
+}
+
+#container .cont{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+#container .item button{
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px 20%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#container .item button:hover{
+    background: #333;
+    color:#fff
+}
